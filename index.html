@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Portfolio Tracker – Multi‑Currency PWA</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Portfolio Tracker</h1>
+    <button id="installBtn" class="btn primary" hidden>Install</button>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Add Transaction</h2>
+      <form id="txForm" autocomplete="off">
+        <div class="grid">
+          <label>
+            <span>Asset</span>
+            <input type="text" id="asset" placeholder="e.g., AAPL, BMW, BTC" required />
+          </label>
+          <label>
+            <span>Market</span>
+            <select id="market" required>
+              <option value="US">US</option>
+              <option value="EU">EU</option>
+              <option value="UK">UK</option>
+              <option value="CH">CH</option>
+            </select>
+          </label>
+          <label>
+            <span>Action</span>
+            <select id="action" required>
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+              <option value="DIV">DIV</option>
+            </select>
+          </label>
+          <label>
+            <span>Quantity</span>
+            <input type="number" step="any" id="quantity" placeholder="0" required />
+          </label>
+          <label>
+            <span>Price</span>
+            <input type="number" step="any" id="price" placeholder="0.00" required />
+          </label>
+          <label>
+            <span>Asset Currency</span>
+            <select id="assetCurrency" required>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </label>
+          <label>
+            <span>Account Currency</span>
+            <select id="accountCurrency" required>
+              <option value="USD">USD</option>
+              <option value="EUR" selected>EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </label>
+          <label>
+            <span>Fee</span>
+            <input type="number" step="any" id="fee" placeholder="0.00" />
+          </label>
+          <label>
+            <span>Fee Currency</span>
+            <select id="feeCurrency">
+              <option value="MATCH">Match Account</option>
+              <option value="USD">USD</option>
+              <option value="EUR" selected>EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="CHF">CHF</option>
+            </select>
+          </label>
+          <label>
+            <span>FX Rate (asset→account)</span>
+            <input type="number" step="any" id="fxRate" placeholder="auto" />
+          </label>
+          <label>
+            <span>FX Fee %</span>
+            <input type="number" step="any" id="fxFeePct" placeholder="0.00" />
+          </label>
+          <label>
+            <span>Date</span>
+            <input type="date" id="date" />
+          </label>
+          <label class="full">
+            <span>Notes</span>
+            <input type="text" id="notes" placeholder="Optional" />
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary">Add</button>
+          <button type="button" id="resetBtn" class="btn">Reset</button>
+          <button type="button" id="exportBtn" class="btn">Export</button>
+          <input type="file" id="importFile" accept="application/json" hidden />
+          <button type="button" id="importBtn" class="btn">Import</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Holdings</h2>
+      <div class="toolbar">
+        <label>
+          <span>Display Currency</span>
+          <select id="displayCurrency">
+            <option value="EUR" selected>EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="CHF">CHF</option>
+          </select>
+        </label>
+      </div>
+      <div id="portfolioSummary" class="summary"></div>
+      <table id="holdingsTable" class="data-table">
+        <thead>
+          <tr>
+            <th>Asset</th>
+            <th>Qty</th>
+            <th>Avg Cost</th>
+            <th>Mkt Px</th>
+            <th>P/L</th>
+            <th>Value</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Transactions</h2>
+      <table id="txTable" class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th><th>Asset</th><th>Action</th><th>Qty</th><th>Price</th><th>Asset CCY</th><th>Fee</th><th>Fee CCY</th><th>FX</th><th>Acct CCY</th><th>Notes</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>Works offline. Your data stays in your browser. v1.0.0</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
